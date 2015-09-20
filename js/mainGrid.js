@@ -1,4 +1,3 @@
-
 //setup blank canvas with changeable pixels
 function PixelPainter (width, height) {
   /*width = rows, height = columns

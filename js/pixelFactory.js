@@ -1,5 +1,4 @@
-
-//set 'this' pixel color to palette color 'purple'
+//set 'this' pixel color to palette color 'purple' or selectedColor
 function changeColor () {
 
 }
