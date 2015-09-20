@@ -1,3 +1,10 @@
 table {
   border-collapse: collapse;
 }
+
+button{
+  background: white;
+  width: auto;
+  height: 30px;
+  margin: 10px;
+}
