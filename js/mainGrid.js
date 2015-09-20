@@ -14,6 +14,8 @@ function PixelPainter (width, height) {
   var gridPx;
   var row;
   var mainGrid = document.createElement('table');
+  mainGrid.addEventListener('mousedown', checkMouseDown);
+  mainGrid.addEventListener('mouseup', checkMouseUp);
   mainGrid.id = 'mainGrid';
 
   for (var i = 0; i < rows; i++) {
@@ -26,8 +28,8 @@ function PixelPainter (width, height) {
     mainGrid.appendChild(row);
   }
   document.body.appendChild(mainGrid);
-  document.body.addEventListener('mousedown', checkMouseDown);
-  document.body.addEventListener('mouseup', checkMouseUp);
+  // document.body.addEventListener('mousedown', checkMouseDown);
+  // document.body.addEventListener('mouseup', checkMouseUp);
 }
 
 function checkMouseDown () {

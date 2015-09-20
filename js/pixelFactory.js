@@ -8,7 +8,7 @@ function pixelFactory () {
   returnPx.style.height = '5px';
   returnPx.style.color = '#000000';
   returnPx.addEventListener('click', changeColor);
-  returnPx.addEventListener('mouseenter', dragColor);
+  returnPx.addEventListener('mouseover', dragColor);
   return returnPx;
 }
 
