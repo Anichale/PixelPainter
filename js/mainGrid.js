@@ -1,5 +1,3 @@
-//setup blank canvas with changeable pixels
-
 /*width = columns, height = rows
 matrix of rows * columns
 populate each cell in matrix with a pixel
@@ -28,8 +26,6 @@ function PixelPainter (width, height) {
     mainGrid.appendChild(row);
   }
   document.body.appendChild(mainGrid);
-  // document.body.addEventListener('mousedown', checkMouseDown);
-  // document.body.addEventListener('mouseup', checkMouseUp);
 }
 
 function checkMouseDown () {
