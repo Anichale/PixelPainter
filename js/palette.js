@@ -11,11 +11,11 @@ function paletteGrid () {
   var counter = 0;
   var palettePx;
   var row;
-  var paletteDiv = document.createElement('div');
+  var paletteDiv = document.createElement('table');
   paletteDiv.id = 'paletteDiv';
 
   for (var i = 0; i < rows; i++) {
-    row = document.createElement('div');
+    row = document.createElement('tr');
     row.className = 'row';
     for (var j = 0; j < col; j++) {
       palettePx = palettePixelFactory(colorArr[counter]);
@@ -29,7 +29,7 @@ function paletteGrid () {
 }
 
 function palettePixelFactory (color) {
-  var returnDiv = document.createElement('div');
+  var returnDiv = document.createElement('td');
   returnDiv.style.background = color;
   returnDiv.style.width = '20px';
   returnDiv.style.height = '20px';
