@@ -5,22 +5,22 @@
 var pixelFactory = (function() {
 
   function createPixel () {
-    var returnPx = document.createElement('td');
-    returnPx.style.width = '5px';
-    returnPx.style.height = '5px';
-    returnPx.style.color = '#000000';
-    returnPx.addEventListener('click', changeColor);
-    returnPx.addEventListener('mouseover', dragColor);
-    return returnPx;
+    var pixel = document.createElement('td');
+    pixel.style.width = '5px';
+    pixel.style.height = '5px';
+    pixel.style.color = '#000000';
+    pixel.addEventListener('click', changeColor);
+    pixel.addEventListener('mouseover', dragColor);
+    return pixel;
   }
 
   function changeColor () {
-    this.style.background = palette.getColor();
+    this.style.background = palette.currentColor();
   }
 
   function dragColor () {
     if (mainGrid.getMouseDown()) {
-      this.style.background = palette.getColor();
+      this.style.background = palette.currentColor();
     }
   }
 

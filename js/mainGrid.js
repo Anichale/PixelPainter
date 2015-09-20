@@ -7,7 +7,7 @@ append row to the canvas
 var mainGrid = (function() {
   var isMouseDown = false;
 
-  function PixelPainter (width, height) {
+  function instantiateCanvas (width, height) {
     var rows = height;
     var columns = width;
     var gridPx;
@@ -41,10 +41,10 @@ var mainGrid = (function() {
     return isMouseDown;
   }
 
-  PixelPainter(100, 100);
+  instantiateCanvas(100, 100);
 
   return {
-    PixelPainter : PixelPainter,
+    instantiateCanvas : instantiateCanvas,
     getMouseDown : getMouseDown
   };
 })();
