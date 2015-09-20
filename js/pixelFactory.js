@@ -4,13 +4,20 @@
 //addEventListener property click changeColor
 function pixelFactory () {
   var returnPx = document.createElement('td');
-  returnPx.style.width = '40px';
-  returnPx.style.height = '40px';
+  returnPx.style.width = '5px';
+  returnPx.style.height = '5px';
   returnPx.style.color = '#000000';
   returnPx.addEventListener('click', changeColor);
+  returnPx.addEventListener('mouseenter', dragColor);
   return returnPx;
 }
 
 function changeColor () {
   this.style.background = selectedColor;
+}
+
+function dragColor () {
+  if (isMouseDown) {
+    this.style.background = selectedColor;
+  }
 }

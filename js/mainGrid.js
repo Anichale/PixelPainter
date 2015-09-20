@@ -6,6 +6,8 @@ populate each cell in matrix with a pixel
 append each pixel to a unique row
 append row to the canvas
 */
+var isMouseDown = false;
+
 function PixelPainter (width, height) {
   var rows = height;
   var columns = width;
@@ -24,6 +26,15 @@ function PixelPainter (width, height) {
     mainGrid.appendChild(row);
   }
   document.body.appendChild(mainGrid);
+  document.body.addEventListener('mousedown', checkMouseDown);
+  document.body.addEventListener('mouseup', checkMouseUp);
 }
 
-PixelPainter(15, 15);
+function checkMouseDown () {
+  isMouseDown = true;
+}
+
+function checkMouseUp () {
+  isMouseDown = false;
+}
+PixelPainter(100, 100);
