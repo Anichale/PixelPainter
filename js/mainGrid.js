@@ -4,6 +4,8 @@ var PixelPainter = window.PixelPainter || {};
 //Canvas module
 PixelPainter.Canvas = (function() {
 
+  var stateArray = [];
+
   //variable to check if mouse is clicked currently
   var isMouseDown = false;
 
@@ -56,6 +58,25 @@ PixelPainter.Canvas = (function() {
     document.body.appendChild(mainGrid);
   }
 
+  function saveState () {
+    var thisState = [];
+    var rowNodes = document.querySelector('#mainGrid').childNodes;
+    var rowChildren;
+    var thisCell;
+    for (var i = 0; i < rowNodes.length; i++) {
+      rowChildren = rowNodes[i].childNodes;
+      for (var j = 0; j < rowChildren.length; j++) {
+        thisCell = rowChildren[j];
+        thisState.push(thisCell.background);
+      }
+    }
+    if (stateArray.length >= 20) {
+      stateArray.shift();
+    }
+    stateArray.push(thisState);
+    console.log(stateArray);
+  }
+
   //event listener function changes isMouseDown variable
   function checkMouseDown () {
     isMouseDown = true;
@@ -64,11 +85,16 @@ PixelPainter.Canvas = (function() {
   //event listener resets when mouse is released
   function checkMouseUp () {
     isMouseDown = false;
+    saveState();
   }
 
   //getter function for our PixelFactory module
   function getMouseDown () {
     return isMouseDown;
+  }
+
+  function getStates () {
+    return stateArray;
   }
 
   //set resolution
@@ -77,6 +103,7 @@ PixelPainter.Canvas = (function() {
   //reveal module
   return {
     instantiateCanvas : instantiateCanvas,
-    getMouseDown : getMouseDown
+    getMouseDown : getMouseDown,
+    getStates : getStates
   };
 })();
