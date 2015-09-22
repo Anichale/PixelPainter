@@ -5,6 +5,7 @@ var PixelPainter = window.PixelPainter || {};
 PixelPainter.Canvas = (function() {
 
   var stateArray = [];
+  var statePos;
 
   //variable to check if mouse is clicked currently
   var isMouseDown = false;
@@ -13,11 +14,11 @@ PixelPainter.Canvas = (function() {
   *  using a matrix that populates the cells using
   *  our PixelFactory module
   */
-  function instantiateCanvas (width, height, stateArray) {
+  function instantiateCanvas (width, height, colArray) {
 
     //matrix pattern to populate canvas
-    var rows = (height ? height : 100);
-    var columns = (width ? width : 100);
+    var rows = (height ? height : 20);
+    var columns = (width ? width : 20);
     var gridPx;
     var row;
     var counter = 0;
@@ -38,10 +39,10 @@ PixelPainter.Canvas = (function() {
       for (var j = 0; j < columns; j++) {
 
         //populate each cell using PixelFactory module
-        //checks if optional stateArray is passed in, if so
+        //checks if optional colArray is passed in, if so
         //give it the color at position counter
-        if (stateArray) {
-          gridPx = PixelPainter.PixelFactory.createPixel(stateArray[counter]);
+        if (colArray) {
+          gridPx = PixelPainter.PixelFactory.createPixel(colArray[counter]);
           counter++;
         } else {
           gridPx = PixelPainter.PixelFactory.createPixel();
@@ -67,14 +68,14 @@ PixelPainter.Canvas = (function() {
       rowChildren = rowNodes[i].childNodes;
       for (var j = 0; j < rowChildren.length; j++) {
         thisCell = rowChildren[j];
-        thisState.push(thisCell.background);
+        thisState.push(thisCell.style.backgroundColor);
       }
     }
     if (stateArray.length >= 20) {
       stateArray.shift();
     }
     stateArray.push(thisState);
-    console.log(stateArray);
+    statePos = stateArray.length - 1;
   }
 
   //event listener function changes isMouseDown variable
@@ -95,6 +96,53 @@ PixelPainter.Canvas = (function() {
 
   function getStates () {
     return stateArray;
+  }
+
+  (function CreateUndoButton () {
+    var undoButton = document.createElement('button');
+    undoButton.innerHTML = 'Undo';
+    undoButton.addEventListener('click', undo);
+    document.body.appendChild(undoButton);
+  })();
+
+  (function CreateRedoButton () {
+    var redoButton = document.createElement('button');
+    redoButton.innerHTML = 'Redo';
+    redoButton.addEventListener('click', redo);
+    document.body.appendChild(redoButton);
+  })();
+
+  function undo () {
+    if (statePos >= 0) {
+      statePos--;
+      var currentState = stateArray[statePos];
+      document.body.removeChild(document.querySelector('#mainGrid'));
+      instantiateCanvas(20, 20, currentState);
+    }
+  }
+
+  function redo () {
+    if (statePos < stateArray.length - 1) {
+      statePos++;
+      var currentState = stateArray[statePos];
+      document.body.removeChild(document.querySelector('#mainGrid'));
+      instantiateCanvas(20, 20, currentState);
+    }
+  }
+
+  (function CreateClearAllButton () {
+    var clearAllButton = document.createElement('button');
+    clearAllButton.innerHTML = 'Clear All';
+    clearAllButton.addEventListener('click', clearAll);
+    document.body.appendChild(clearAllButton);
+  })();
+
+  //first clears the DOM of all canvases and instantiates a new one
+  function clearAll () {
+    stateArray = [];
+    statePos = stateArray.length - 1;
+    document.body.removeChild(document.querySelector('#mainGrid'));
+    instantiateCanvas();
   }
 
   //set resolution

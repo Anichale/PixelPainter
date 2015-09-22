@@ -50,7 +50,7 @@ PixelPainter.Options = (function () {
   //takes in @param color to create a cell swatch
   function createPaletteSwatch (color) {
     var paletteSwatch = document.createElement('td');
-    paletteSwatch.style.background = color;
+    paletteSwatch.style.backgroundColor = color;
     paletteSwatch.style.width = '20px';
     paletteSwatch.style.height = '20px';
     paletteSwatch.addEventListener('click', colorSelector);
@@ -59,7 +59,7 @@ PixelPainter.Options = (function () {
 
   //for event listener, changes our brush color to this color
   function colorSelector () {
-    selectedColor = this.style.background;
+    selectedColor = this.style.backgroundColor;
   }
 
   //erase button sets brush color to white
@@ -70,22 +70,8 @@ PixelPainter.Options = (function () {
     document.body.appendChild(eraseButton);
   })();
 
-  //clear button resets the canvas
-  (function CreateClearAllButton () {
-    var clearAllButton = document.createElement('button');
-    clearAllButton.innerHTML = 'Clear All';
-    clearAllButton.addEventListener('click', clearAll);
-    document.body.appendChild(clearAllButton);
-  })();
-
   function eraser () {
     selectedColor = '#FFFFFF';
-  }
-
-  //first clears the DOM of all canvases and instantiates a new one
-  function clearAll () {
-    document.body.removeChild(document.querySelector('#mainGrid'));
-    PixelPainter.Canvas.instantiateCanvas();
   }
 
   //getter function for other modules to grab the brush color
