@@ -4,6 +4,7 @@ var PixelPainter = window.PixelPainter || {};
 //Canvas module
 PixelPainter.Canvas = (function() {
 
+  var swatch = PixelPainter.Options.getPalette();
   var stateArray = [];
   var statePos;
 
@@ -68,7 +69,7 @@ PixelPainter.Canvas = (function() {
       rowChildren = rowNodes[i].childNodes;
       for (var j = 0; j < rowChildren.length; j++) {
         thisCell = rowChildren[j];
-        thisState.push(thisCell.style.backgroundColor);
+        thisState.push(thisCell.dataset.index);
       }
     }
     if (stateArray.length >= 20) {
