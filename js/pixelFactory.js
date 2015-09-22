@@ -5,11 +5,11 @@ var PixelPainter = window.PixelPainter || {};
 PixelPainter.PixelFactory = (function() {
 
   //creates cells for our Canvas
-  function createPixel () {
+  function createPixel (color) {
     var pixel = document.createElement('td');
     pixel.style.width = '5px';
     pixel.style.height = '5px';
-    pixel.style.color = '#000000';
+    pixel.style.color = (color ? color : '#000000');
     pixel.addEventListener('click', changeColor);
     pixel.addEventListener('mouseover', dragColor);
     return pixel;

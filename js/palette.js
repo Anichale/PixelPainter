@@ -85,7 +85,7 @@ PixelPainter.Options = (function () {
   //first clears the DOM of all canvases and instantiates a new one
   function clearAll () {
     document.body.removeChild(document.querySelector('#mainGrid'));
-    PixelPainter.Canvas.instantiateCanvas(100, 100);
+    PixelPainter.Canvas.instantiateCanvas();
   }
 
   //getter function for other modules to grab the brush color

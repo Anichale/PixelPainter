@@ -11,13 +11,14 @@ PixelPainter.Canvas = (function() {
   *  using a matrix that populates the cells using
   *  our PixelFactory module
   */
-  function instantiateCanvas (width, height) {
+  function instantiateCanvas (width, height, stateArray) {
 
     //matrix pattern to populate canvas
-    var rows = height;
-    var columns = width;
+    var rows = (height ? height : 100);
+    var columns = (width ? width : 100);
     var gridPx;
     var row;
+    var counter = 0;
 
     //init table
     var mainGrid = document.createElement('table');
@@ -35,7 +36,15 @@ PixelPainter.Canvas = (function() {
       for (var j = 0; j < columns; j++) {
 
         //populate each cell using PixelFactory module
-        gridPx = PixelPainter.PixelFactory.createPixel();
+        //checks if optional stateArray is passed in, if so
+        //give it the color at position counter
+        if (stateArray) {
+          gridPx = PixelPainter.PixelFactory.createPixel(stateArray[counter]);
+          counter++;
+        } else {
+          gridPx = PixelPainter.PixelFactory.createPixel();
+        }
+
         row.appendChild(gridPx);
       }
 
@@ -63,7 +72,7 @@ PixelPainter.Canvas = (function() {
   }
 
   //set resolution
-  instantiateCanvas(100, 100);
+  instantiateCanvas();
 
   //reveal module
   return {
