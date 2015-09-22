@@ -99,6 +99,30 @@ PixelPainter.Canvas = (function() {
     return stateArray;
   }
 
+  (function CreateSaveButton () {
+    var saveButton = document.createElement('button');
+    saveButton.innerHTML = 'Save';
+    saveButton.addEventListener('click', save);
+    document.body.appendChild(saveButton);
+  })();
+
+  function save () {
+    window.location.hash = stateArray[statePos].join('$');
+  }
+
+  (function CreateLoadButton () {
+    var loadButton = document.createElement('button');
+    loadButton.innerHTML = 'Load';
+    loadButton.addEventListener('click', load);
+    document.body.appendChild(loadButton);
+  })();
+
+  function load () {
+    var loaded = window.location.hash.slice(1).split('$');
+    document.body.removeChild(document.querySelector('#mainGrid'));
+    instantiateCanvas(20, 20, loaded);
+  }
+
   (function CreateUndoButton () {
     var undoButton = document.createElement('button');
     undoButton.innerHTML = 'Undo';
@@ -142,8 +166,9 @@ PixelPainter.Canvas = (function() {
   function clearAll () {
     stateArray = [];
     statePos = stateArray.length - 1;
+    //window.location.hash = '';
     document.body.removeChild(document.querySelector('#mainGrid'));
-    instantiateCanvas();
+    PixelPainter.Canvas.instantiateCanvas();
   }
 
   //set resolution

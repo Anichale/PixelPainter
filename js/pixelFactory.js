@@ -25,8 +25,6 @@ PixelPainter.PixelFactory = (function() {
     //first checks if string begins with rgb(a optional) then for each digit checks for an optional string (r,g,b,a) in front
     rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
 
-    console.log(rgb);
-    //
     return (rgb && rgb.length === 4) ? '#' + ('0' + parseInt(rgb[1], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[2], 10).toString(16)).slice(-2) + ('0' + parseInt(rgb[3], 10).toString(16)).slice(-2) : '';
   }
 
