@@ -99,14 +99,14 @@ PixelPainter.Canvas = (function() {
     return stateArray;
   }
 
-  (function CreateSaveButton () {
+  (function CreateEncodeButton () {
     var saveButton = document.createElement('button');
     saveButton.innerHTML = 'Save';
-    saveButton.addEventListener('click', save);
+    saveButton.addEventListener('click', encode);
     document.body.appendChild(saveButton);
   })();
 
-  function save () {
+  function encode () {
     var currentState = stateArray[statePos];
     var counter = 1;
     var returnstring = '';
@@ -114,24 +114,46 @@ PixelPainter.Canvas = (function() {
       if (currentState[i] == currentState[i + 1]) {
         counter++;
       } else {
-        returnstring += counter + 'x' + currentState[i] + '$';
+        if (counter === 1) {
+          returnstring += currentState[i] + '$';
+        } else {
+          returnstring += counter + 'x' + currentState[i] + '$';
+        }
         counter = 1;
       }
     }
+    console.log(returnstring);
     window.location.hash = returnstring;
   }
 
   (function CreateLoadButton () {
     var loadButton = document.createElement('button');
     loadButton.innerHTML = 'Load';
-    loadButton.addEventListener('click', load);
+    loadButton.addEventListener('click', decode);
     document.body.appendChild(loadButton);
   })();
 
-  function load () {
-    var loaded = window.location.hash.slice(1).split('$');
+  function decode () {
+    var decoded = [];
+    var cell;
+    var multiplier;
+    var color;
+    var toDecode = window.location.hash.slice(1).split('$');
+
+    for (var i = 0; i < toDecode.length; i++) {
+      cell = toDecode[i];
+      if (cell.includes('x')) {
+        multiplier = cell.split('x');
+        for (var j = 0; j < multiplier[0]; j++) {
+          decoded.push(multiplier[1]);
+        }
+      } else {
+        decoded.push(toDecode[i]);
+      }
+    }
+
     document.body.removeChild(document.querySelector('#mainGrid'));
-    instantiateCanvas(20, 20, loaded);
+    instantiateCanvas(20, 20, decoded);
   }
 
   (function CreateUndoButton () {
@@ -149,7 +171,7 @@ PixelPainter.Canvas = (function() {
   })();
 
   function undo () {
-    if (statePos > 0) {
+    if (statePos >= 0) {
       statePos--;
       var currentState = stateArray[statePos];
       document.body.removeChild(document.querySelector('#mainGrid'));
@@ -175,10 +197,10 @@ PixelPainter.Canvas = (function() {
 
   //first clears the DOM of all canvases and instantiates a new one
   function clearAll () {
-    stateArray = [];
-    statePos = stateArray.length - 1;
     document.body.removeChild(document.querySelector('#mainGrid'));
     PixelPainter.Canvas.instantiateCanvas();
+    stateArray = [];
+    statePos = stateArray.length - 1;
   }
 
   //set resolution
