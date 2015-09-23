@@ -1,7 +1,6 @@
-/*table {
-  border: 2px solid black;
-
-}*/
+table {
+  border-collapse: collapse;
+}
 
 button {
   background: white;

@@ -74,25 +74,25 @@ PixelPainter.Options = (function () {
     selectedColor = '#FFFFFF';
   }
 
-  (function CreateGridButton () {
-    var gridButton = document.createElement('button');
-    gridButton.innerHTML = 'Toggle Grid';
-    gridButton.addEventListener('click', toggleGrid);
-    document.body.appendChild(gridButton);
-  })();
+  // (function CreateGridButton () {
+  //   var gridButton = document.createElement('button');
+  //   gridButton.innerHTML = 'Toggle Grid';
+  //   gridButton.addEventListener('click', toggleGrid);
+  //   document.body.appendChild(gridButton);
+  // })();
 
-  function toggleGrid () {
-    var table = document.getElementsByTagName('table');
-    [].forEach.call(table, function(item) {
-      console.log(item);
-      if (item.style.borderCollapse) {
-        item.style.borderCollapse = ' ';
-      } else {
-        item.style.borderCollapse = 'collapse';
-      }
-    });
+  // function toggleGrid () {
+  //   var table = document.getElementsByTagName('table');
+  //   [].forEach.call(table, function(item) {
+  //     console.log(item);
+  //     if (item.style.borderCollapse) {
+  //       item.style.borderCollapse = ' ';
+  //     } else {
+  //       item.style.borderCollapse = 'collapse';
+  //     }
+  //   });
 
-  }
+  // }
 
   //getter function for other modules to grab the brush color
   function currentColor () {

@@ -107,7 +107,18 @@ PixelPainter.Canvas = (function() {
   })();
 
   function save () {
-    window.location.hash = stateArray[statePos].join('$');
+    var currentState = stateArray[statePos];
+    var counter = 1;
+    var returnstring = '';
+    for (var i = 0; i < currentState.length; i++) {
+      if (currentState[i] == currentState[i + 1]) {
+        counter++;
+      } else {
+        returnstring += counter + 'x' + currentState[i] + '$';
+        counter = 1;
+      }
+    }
+    window.location.hash = returnstring;
   }
 
   (function CreateLoadButton () {
@@ -138,7 +149,7 @@ PixelPainter.Canvas = (function() {
   })();
 
   function undo () {
-    if (statePos >= 0) {
+    if (statePos > 0) {
       statePos--;
       var currentState = stateArray[statePos];
       document.body.removeChild(document.querySelector('#mainGrid'));
@@ -166,7 +177,6 @@ PixelPainter.Canvas = (function() {
   function clearAll () {
     stateArray = [];
     statePos = stateArray.length - 1;
-    //window.location.hash = '';
     document.body.removeChild(document.querySelector('#mainGrid'));
     PixelPainter.Canvas.instantiateCanvas();
   }
