@@ -4,10 +4,10 @@ var PixelPainter = window.PixelPainter || {};
 //Canvas module
 PixelPainter.Canvas = (function() {
 
+  var config = PixelPainter.config;
   var swatch = PixelPainter.Options.getPalette();
   var stateArray = [];
   var statePos;
-  var pConfig = PixelPainter.config;
 
   //variable to check if mouse is clicked currently
   var isMouseDown = false;
@@ -16,11 +16,11 @@ PixelPainter.Canvas = (function() {
   *  using a matrix that populates the cells using
   *  our PixelFactory module
   */
-  function instantiateCanvas (config, colArray) {
+  function instantiateCanvas (colArray) {
 
     //matrix pattern to populate canvas
-    var rows = (config ? config.height : pConfig.height);
-    var columns = (config ? config.width : pConfig.width);
+    var rows = config.height;
+    var columns = config.width;
     var gridPx;
     var row;
     var counter = 0;
@@ -96,10 +96,6 @@ PixelPainter.Canvas = (function() {
     return isMouseDown;
   }
 
-  function getConfig () {
-    return pConfig;
-  }
-
   (function CreateEncodeButton () {
     var saveButton = document.createElement('button');
     saveButton.innerHTML = 'Save';
@@ -153,7 +149,7 @@ PixelPainter.Canvas = (function() {
     }
 
     document.body.removeChild(document.querySelector('#mainGrid'));
-    instantiateCanvas(pConfig, decoded);
+    instantiateCanvas(decoded);
     saveState();
   }
 
@@ -176,7 +172,7 @@ PixelPainter.Canvas = (function() {
       statePos--;
       var currentState = stateArray[statePos];
       document.body.removeChild(document.querySelector('#mainGrid'));
-      instantiateCanvas(pConfig, currentState);
+      instantiateCanvas(currentState);
     }
   }
 
@@ -185,7 +181,7 @@ PixelPainter.Canvas = (function() {
       statePos++;
       var currentState = stateArray[statePos];
       document.body.removeChild(document.querySelector('#mainGrid'));
-      instantiateCanvas(pConfig, currentState);
+      instantiateCanvas(currentState);
     }
   }
 
@@ -199,15 +195,16 @@ PixelPainter.Canvas = (function() {
   //first clears the DOM of all canvases and instantiates a new one
   function clearAll () {
     document.body.removeChild(document.querySelector('#mainGrid'));
-    PixelPainter.Canvas.instantiateCanvas(pConfig);
+    PixelPainter.Canvas.instantiateCanvas();
     stateArray = [];
     saveState();
   }
 
+  instantiateCanvas();
+
   //reveal module
   return {
     instantiateCanvas : instantiateCanvas,
-    getMouseDown : getMouseDown,
-    getConfig : getConfig
+    getMouseDown : getMouseDown
   };
 })();
