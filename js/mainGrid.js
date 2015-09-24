@@ -7,6 +7,7 @@ PixelPainter.Canvas = (function() {
   var swatch = PixelPainter.Options.getPalette();
   var stateArray = [];
   var statePos;
+  var pConfig = PixelPainter.config;
 
   //variable to check if mouse is clicked currently
   var isMouseDown = false;
@@ -15,11 +16,11 @@ PixelPainter.Canvas = (function() {
   *  using a matrix that populates the cells using
   *  our PixelFactory module
   */
-  function instantiateCanvas (width, height, colArray) {
+  function instantiateCanvas (config, colArray) {
 
     //matrix pattern to populate canvas
-    var rows = (height ? height : 20);
-    var columns = (width ? width : 20);
+    var rows = (config ? config.height : pConfig.height);
+    var columns = (config ? config.width : pConfig.width);
     var gridPx;
     var row;
     var counter = 0;
@@ -95,8 +96,8 @@ PixelPainter.Canvas = (function() {
     return isMouseDown;
   }
 
-  function getStates () {
-    return stateArray;
+  function getConfig () {
+    return pConfig;
   }
 
   (function CreateEncodeButton () {
@@ -122,7 +123,6 @@ PixelPainter.Canvas = (function() {
         counter = 1;
       }
     }
-    console.log(returnstring);
     window.location.hash = returnstring;
   }
 
@@ -153,7 +153,8 @@ PixelPainter.Canvas = (function() {
     }
 
     document.body.removeChild(document.querySelector('#mainGrid'));
-    instantiateCanvas(20, 20, decoded);
+    instantiateCanvas(pConfig, decoded);
+    saveState();
   }
 
   (function CreateUndoButton () {
@@ -175,7 +176,7 @@ PixelPainter.Canvas = (function() {
       statePos--;
       var currentState = stateArray[statePos];
       document.body.removeChild(document.querySelector('#mainGrid'));
-      instantiateCanvas(20, 20, currentState);
+      instantiateCanvas(pConfig, currentState);
     }
   }
 
@@ -184,7 +185,7 @@ PixelPainter.Canvas = (function() {
       statePos++;
       var currentState = stateArray[statePos];
       document.body.removeChild(document.querySelector('#mainGrid'));
-      instantiateCanvas(20, 20, currentState);
+      instantiateCanvas(pConfig, currentState);
     }
   }
 
@@ -198,18 +199,15 @@ PixelPainter.Canvas = (function() {
   //first clears the DOM of all canvases and instantiates a new one
   function clearAll () {
     document.body.removeChild(document.querySelector('#mainGrid'));
-    PixelPainter.Canvas.instantiateCanvas();
+    PixelPainter.Canvas.instantiateCanvas(pConfig);
     stateArray = [];
-    statePos = stateArray.length - 1;
+    saveState();
   }
-
-  //set resolution
-  instantiateCanvas();
 
   //reveal module
   return {
     instantiateCanvas : instantiateCanvas,
     getMouseDown : getMouseDown,
-    getStates : getStates
+    getConfig : getConfig
   };
 })();

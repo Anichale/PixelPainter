@@ -5,13 +5,14 @@ var PixelPainter = window.PixelPainter || {};
 PixelPainter.PixelFactory = (function() {
 
   var swatch = PixelPainter.Options.getPalette();
+  var config = PixelPainter.config;
   var hexValue;
 
   //creates cells for our Canvas
   function createPixel (colorIndex) {
     var pixel = document.createElement('td');
-    pixel.style.width = '15px';
-    pixel.style.height = '15px';
+    pixel.style.width = config.gridSize.toString();
+    pixel.style.height = config.gridSize.toString();
     pixel.style.backgroundColor = (colorIndex ? swatch[colorIndex] : '#FFFFFF');
     pixel.dataset.index = (colorIndex ? colorIndex : swatch.indexOf('#FFFFFF'));
     pixel.addEventListener('click', changeColor);
