@@ -7,6 +7,8 @@ PixelPainter.Canvas = (function() {
   var config = PixelPainter.config;
   var swatch = PixelPainter.Options.getPalette();
 
+  var leftBar = document.getElementById('pixelPainter');
+
   //create empty state array - manages states for undo, redo, save and load
   var stateArray = [];
 
@@ -121,10 +123,10 @@ PixelPainter.Canvas = (function() {
 
   //button for our encode function
   (function CreateEncodeButton () {
-    var saveButton = document.createElement('button');
-    saveButton.innerHTML = 'Save';
+    var saveButton = document.createElement('div');
+    saveButton.innerHTML = 'SAVE';
     saveButton.addEventListener('click', encode);
-    document.body.appendChild(saveButton);
+    leftBar.appendChild(saveButton);
   })();
 
   // takes our current state (picture) and
@@ -168,10 +170,10 @@ PixelPainter.Canvas = (function() {
 
   //button for decode function
   (function CreateLoadButton () {
-    var loadButton = document.createElement('button');
-    loadButton.innerHTML = 'Load';
+    var loadButton = document.createElement('div');
+    loadButton.innerHTML = 'LOAD';
     loadButton.addEventListener('click', decode);
-    document.body.appendChild(loadButton);
+    leftBar.appendChild(loadButton);
   })();
 
   // takes our hash string and
@@ -222,18 +224,18 @@ PixelPainter.Canvas = (function() {
 
   // undo button
   (function CreateUndoButton () {
-    var undoButton = document.createElement('button');
-    undoButton.innerHTML = 'Undo';
+    var undoButton = document.createElement('div');
+    undoButton.innerHTML = 'UNDO';
     undoButton.addEventListener('click', undo);
-    document.body.appendChild(undoButton);
+    leftBar.appendChild(undoButton);
   })();
 
   // redo button
   (function CreateRedoButton () {
-    var redoButton = document.createElement('button');
-    redoButton.innerHTML = 'Redo';
+    var redoButton = document.createElement('div');
+    redoButton.innerHTML = 'REDO';
     redoButton.addEventListener('click', redo);
-    document.body.appendChild(redoButton);
+    leftBar.appendChild(redoButton);
   })();
 
   // changes our position in our state array by -1, then redraws our canvas
@@ -260,10 +262,10 @@ PixelPainter.Canvas = (function() {
 
   // clear button
   (function CreateClearAllButton () {
-    var clearAllButton = document.createElement('button');
-    clearAllButton.innerHTML = 'Clear All';
+    var clearAllButton = document.createElement('div');
+    clearAllButton.innerHTML = 'CLEAR ALL';
     clearAllButton.addEventListener('click', clearAll);
-    document.body.appendChild(clearAllButton);
+    leftBar.appendChild(clearAllButton);
   })();
 
   //first clears the DOM of all canvases and instantiates a new one

@@ -1,19 +1,52 @@
+html, button{
+  font-family: 'Roboto Slab', serif;
+  color: #CDB380;
+  text-align: center;
+}
+
 table {
   border-collapse: collapse;
 }
 
 button {
-  background: white;
-  width: auto;
-  height: 30px;
-  margin: 10px;
 }
 
 #Canvas  {
-  border: 2px solid black;
+  width: 400px;
+  height: 400px;
+  position: relative;
+  border: 5px solid #031634;
   margin: auto;
 }
 
+#pixelPainter {
+  background-color: #031634;
+  width: 175px;
+  height: 100%;
+  float: left;
+  padding: 20px;
+}
+
+#pixelPainter h1 {
+  font-size: 25px;
+}
+
+#pixelPainter div {
+  background: #031634;
+  border: 4px solid #CDB380;
+  color: #CDB380;
+  display: block;
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+}
+
 #paletteTable {
-  margin: 30px;
+  margin: auto;
+}
+
+body{
+  background-color: #E8DDCB;
+  padding: 0px;
+  margin: 0px;
 }
