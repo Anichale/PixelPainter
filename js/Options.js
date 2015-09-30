@@ -72,7 +72,6 @@ PixelPainter.Options = (function () {
     selectedColor = this.style.backgroundColor;
     target.style.border = '5px solid black';
     prevTarget = target;
-
   }
 
   //erase button sets brush color to white
@@ -84,6 +83,9 @@ PixelPainter.Options = (function () {
   })();
 
   function eraser () {
+    if (prevTarget) {
+      prevTarget.style.border = '';
+    }
     selectedColor = '#FFFFFF';
   }
 
