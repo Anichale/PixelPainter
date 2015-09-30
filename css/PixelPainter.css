@@ -49,6 +49,11 @@ table {
   margin: auto;
 }
 
+.paletteRow > td:hover {
+  border: 3px solid #031634;
+}
+
+
 body{
   background-color: #E8DDCB;
   padding: 0px;
