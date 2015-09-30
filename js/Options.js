@@ -5,6 +5,8 @@ var PixelPainter = window.PixelPainter || {};
 PixelPainter.Options = (function () {
   //paintbrush initialized to black;
   var selectedColor = '#000000';
+  var target;
+  var prevTarget;
 
   var leftBar = document.getElementById('pixelPainter');
 
@@ -60,8 +62,17 @@ PixelPainter.Options = (function () {
   }
 
   //for event listener, changes our brush color to this color
-  function colorSelector () {
+  //adds a border for selected swatch and removes the old one
+  //on click
+  function colorSelector (e) {
+    if (prevTarget) {
+      prevTarget.style.border = '';
+    }
+    target = e.target;
     selectedColor = this.style.backgroundColor;
+    target.style.border = '5px solid black';
+    prevTarget = target;
+
   }
 
   //erase button sets brush color to white
