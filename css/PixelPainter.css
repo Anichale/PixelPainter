@@ -8,18 +8,17 @@ table {
   border-collapse: collapse;
 }
 
-button {
-}
-
 #Canvas  {
+  position: absolute;
   width: 400px;
   height: 400px;
-  position: relative;
   border: 5px solid #031634;
-  margin: auto;
+  margin-top: 100px;
+  margin-left: 250px;
 }
 
 #pixelPainter {
+  position: absolute;
   background-color: #031634;
   width: 175px;
   height: 100%;
@@ -39,6 +38,11 @@ button {
   width: auto;
   height: auto;
   margin-top: 20px;
+}
+
+#pixelPainter div:hover {
+  border: 4px solid #E8DDCB;
+  color: #E8DDCB;
 }
 
 #paletteTable {
