@@ -3,7 +3,7 @@ var PixelPainter = window.PixelPainter || {};
 
 //configuration object
 PixelPainter.config = {
-  height : 20,
-  width : 20,
-  gridSize : 50
+  height : 40,
+  width : 40,
+  gridSize : 15
 };
