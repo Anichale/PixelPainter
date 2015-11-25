@@ -1,35 +1,25 @@
-PixelPainter
-============
+# Pixel Painter
 
-> Coloring pixels in a grid
+![](assets/anichale.github.io!PixelPainter-1000x800.png)
 
-![sketch](http://i.imgur.com/6kLmYWp.png)
+Create beautiful pixel-art style masterpieces with this painting application. Choose from 64 different colors by either filling in individuals squares with a click or dragging the mouse to paint multiple squares with your chosen color. Built with vanilla Javascript, HTML and CSS.
 
-PixelPainter is a plugin that you will create. It has a color swatch of infinite colors and a grid of infinite size! When a user clicks on a color from the swatch they can paint the color on the pixel grid! There should also be two buttons, one for erasing a color and the other to clear the entire canvas.
+## Examples
+http://anichale.github.io/PixelPainter/\
+Load Example :
+tinyurl.com/qxgs2hx (includes query string, press load button to view image)
+## Features
 
-## Getting Started and Specs
+### Save & Load
 
-### PixelPainter(_width_, _height_)
-When instatiated it appends a new PixelPainter object to a HTML div element with an id of **pp-canvas**.
+Save your current painting as a querystring in the url. Send your querystring to people you love and have them load it \
+on their Pixel Painter.
 
-**note**: you can use either the _Module_ or _Classical_ OOP Patterns for this.
+### Undo & Redo
 
-The `height` and `width` attributes set the size of the **canvas**. Each cell of the canvas can be any width or height you choose but it should be a square.
+Mess up your painting? Simply hit undo. Change your mind about that undo? Hit redo. \
+Keeps a maximum of the last 20 undos.
 
-The height and width of the **color swatch** will be determined by the colors available which you, the developer, will set.
+### Clear All
 
-Do not edit the `index.html` file. You will generate all of your html markup using jQuery and inserting newly generated elements into the dom using jQuery.
-
-## Bonus Round
-Develop a way for PixelPainter to accept an configuration object at the moment of instatiation while still supporting the passing in two parameters, as mentioned previously.
-
-An example of the configuration object may look like:
-
-```javascript
-{
-  width: 6,
-  height: 6,
-  gridSize: 10,
-  colorSwatch: ["#000000", "#0000FF", "#00FFFF", "#FFFFFF"]
-}
-```
+Decide you need a clean slate? Wipe it all away with the Clear All button.
