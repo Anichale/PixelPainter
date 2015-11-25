@@ -1,6 +1,6 @@
 # Pixel Painter
 
-![](assets/anichale.github.io!PixelPainter-1000x800.png)
+![](/../gh-pages/assets/anichale.github.io!PixelPainter-1000X800.png)
 
 Create beautiful pixel-art style masterpieces with this painting application. Choose from 64 different colors by either filling in individuals squares with a click or dragging the mouse to paint multiple squares with your chosen color. Built with vanilla Javascript, HTML and CSS.
 
